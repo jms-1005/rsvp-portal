@@ -11,7 +11,7 @@
 //
 // Secrets (set with `supabase secrets set ...`):
 //   RESEND_API_KEY   your key from resend.com
-//   FROM_EMAIL       e.g. "RSVP Portal <rsvp@yourdomain.com>"
+//   FROM_EMAIL       optional, defaults to "RSVP Portal <invites@rsvp.lampstand.school>"
 //   SITE_URL         where the app is hosted, e.g. https://rsvp.example.com/
 // =====================================================================
 
@@ -99,7 +99,7 @@ Deno.serve(async (req) => {
         method: "POST",
         headers: { Authorization: `Bearer ${Deno.env.get("RESEND_API_KEY")}`, "Content-Type": "application/json" },
         body: JSON.stringify({
-          from: Deno.env.get("FROM_EMAIL") || "RSVP Portal <onboarding@resend.dev>",
+          from: Deno.env.get("FROM_EMAIL") || "RSVP Portal <invites@rsvp.lampstand.school>",
           to: [g.invitee_email],
           subject,
           html,
